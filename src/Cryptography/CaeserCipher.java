@@ -1,7 +1,5 @@
 package Cryptography;
 
-import java.util.Arrays;
-
 public class CaeserCipher extends Cryptor{
     private String plainText;
     private String cipherText;
@@ -16,10 +14,10 @@ public class CaeserCipher extends Cryptor{
         char[] plainCharArr = getPlainText().toCharArray();
         char[] cipherCharArr = new char[plainCharArr.length];
         for(int i=0;i<plainCharArr.length;i++){
-            if(! (plainCharArr[i] == (int) ' ') ){  // if NOT ( that character == space as ASCII char )
+            if(plainCharArr[i] > 64 && plainCharArr[i] < 133){
                 cipherCharArr[i] = shift(plainCharArr[i], shiftFactor);
             } else {
-                cipherCharArr[i] = ' ';
+                cipherCharArr[i] = plainCharArr[i];
             }
         }
         setCipherText(String.valueOf(cipherCharArr));
@@ -30,10 +28,10 @@ public class CaeserCipher extends Cryptor{
         char[] cipherCharArr = getCipherText().toCharArray();
         char[] plainCharArr = new char[cipherCharArr.length];
         for(int i=0;i<cipherCharArr.length;i++){
-            if(! (cipherCharArr[i] == (int) ' ') ){  // if NOT ( that character == space as ASCII char )
+            if(cipherCharArr[i] > 64 && cipherCharArr[i] < 133){
                 plainCharArr[i] = shift(cipherCharArr[i], 0-shiftFactor);
             } else {
-                plainCharArr[i] = ' ';
+                plainCharArr[i] = cipherCharArr[i];
             }
         }
         setPlainText(String.valueOf(plainCharArr));

@@ -11,14 +11,9 @@ public abstract class Cryptor {
         toCaps();
 
         try {
-            System.out.println("asjadndkjl4");
-            System.out.println("b4 p: "+plainText);
             encrypt();
-            System.out.println("sdl;g");
         } catch (Exception e) {
             cipherText = "Failure ";
-            System.out.println("Error in encryption. Printing stack trace: ");
-            System.out.println();
             e.printStackTrace();
         }
         return cipherText;

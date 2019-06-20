@@ -23,6 +23,12 @@ public class MainTest {
         System.out.println();
         System.out.println();
         System.out.println("result: "+result);
+
+        result = caeserCipher.encryptCall("Hdsfgsdg");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("result: "+result);
     }
 
 
