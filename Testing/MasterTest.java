@@ -1,13 +1,16 @@
 import Cryptography.CaeserCipher;
+import Cryptography.MonoAlphabeticSubstitutionCipher;
 import org.junit.jupiter.api.*;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MasterTest {
     private String shortPlain = "HELLO WORLD";
-    private String midPlain = "If a machine is expected to be infallible, it cannot also be intelligent".toUpperCase();
-    private String longPlain = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure? On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains".toUpperCase();
+    private String midPlain = "IF A MACHINE IS EXPECTED TO BE INFALLIBLE, IT CANNOT ALSO BE INTELLIGENT";
+    private String longPlain = "BUT I MUST EXPLAIN TO YOU HOW ALL THIS MISTAKEN IDEA OF DENOUNCING PLEASURE AND PRAISING PAIN WAS BORN AND I WILL GIVE YOU A COMPLETE ACCOUNT OF THE SYSTEM, AND EXPOUND THE ACTUAL TEACHINGS OF THE GREAT EXPLORER OF THE TRUTH, THE MASTER-BUILDER OF HUMAN HAPPINESS. NO ONE REJECTS, DISLIKES, OR AVOIDS PLEASURE ITSELF, BECAUSE IT IS PLEASURE, BUT BECAUSE THOSE WHO DO NOT KNOW HOW TO PURSUE PLEASURE RATIONALLY ENCOUNTER CONSEQUENCES THAT ARE EXTREMELY PAINFUL. NOR AGAIN IS THERE ANYONE WHO LOVES OR PURSUES OR DESIRES TO OBTAIN PAIN OF ITSELF, BECAUSE IT IS PAIN, BUT OCCASIONALLY CIRCUMSTANCES OCCUR IN WHICH TOIL AND PAIN CAN PROCURE HIM SOME GREAT PLEASURE. TO TAKE A TRIVIAL EXAMPLE, WHICH OF US EVER UNDERTAKES LABORIOUS PHYSICAL EXERCISE, EXCEPT TO OBTAIN SOME ADVANTAGE FROM IT? BUT WHO HAS ANY RIGHT TO FIND FAULT WITH A MAN WHO CHOOSES TO ENJOY A PLEASURE THAT HAS NO ANNOYING CONSEQUENCES, OR ONE WHO AVOIDS A PAIN THAT PRODUCES NO RESULTANT PLEASURE? ON THE OTHER HAND, WE DENOUNCE WITH RIGHTEOUS INDIGNATION AND DISLIKE MEN WHO ARE SO BEGUILED AND DEMORALIZED BY THE CHARMS OF PLEASURE OF THE MOMENT, SO BLINDED BY DESIRE, THAT THEY CANNOT FORESEE THE PAIN AND TROUBLE THAT ARE BOUND TO ENSUE; AND EQUAL BLAME BELONGS TO THOSE WHO FAIL IN THEIR DUTY THROUGH WEAKNESS OF WILL, WHICH IS THE SAME AS SAYING THROUGH SHRINKING FROM TOIL AND PAIN. THESE CASES ARE PERFECTLY SIMPLE AND EASY TO DISTINGUISH. IN A FREE HOUR, WHEN OUR POWER OF CHOICE IS UNTRAMMELLED AND WHEN NOTHING PREVENTS OUR BEING ABLE TO DO WHAT WE LIKE BEST, EVERY PLEASURE IS TO BE WELCOMED AND EVERY PAIN AVOIDED. BUT IN CERTAIN CIRCUMSTANCES AND OWING TO THE CLAIMS OF DUTY OR THE OBLIGATIONS OF BUSINESS IT WILL FREQUENTLY OCCUR THAT PLEASURES HAVE TO BE REPUDIATED AND ANNOYANCES ACCEPTED. THE WISE MAN THEREFORE ALWAYS HOLDS IN THESE MATTERS TO THIS PRINCIPLE OF SELECTION: HE REJECTS PLEASURES TO SECURE OTHER GREATER PLEASURES, OR ELSE HE ENDURES PAINS TO AVOID WORSE PAINS";
+
 
     @Nested
     @DisplayName("Tests for Caeser cipher")
@@ -54,4 +57,80 @@ public class MasterTest {
             Assertions.assertEquals(longPlain, caeserCipher.decryptCall(longCipher));
         }
     }
+
+    @Nested
+    @DisplayName("Tests for MAS cipher")
+    class MASTests {
+        private MonoAlphabeticSubstitutionCipher mASCipher;
+        private HashMap<Character, Character> alphabet = new HashMap<>();
+        private String shortCipher = "WCVVT XTHVL";
+        private String midCipher = "IZ Q AQFWIEC ID CYPCFSCL ST BC IEZQVVIBVC, IS FQEETS QVDT BC IESCVVIGCES";
+        private String longCipher = "BRS I ARDS CYPVQIE ST MTR WTX QVV SWID AIDSQJCE ILCQ TZ LCETREFIEG PVCQDRHC QEL PHQIDIEG PQIE XQD BTHE QEL I XIVV GIKC MTR Q FTAPVCSC QFFTRES TZ SWC DMDSCA, QEL CYPTREL SWC QFSRQV SCQFWIEGD TZ SWC GHCQS CYPVTHCH TZ SWC SHRSW, SWC AQDSCH-BRIVLCH TZ WRAQE WQPPIECDD. ET TEC HCOCFSD, LIDVIJCD, TH QKTILD PVCQDRHC ISDCVZ, BCFQRDC IS ID PVCQDRHC, BRS BCFQRDC SWTDC XWT LT ETS JETX WTX ST PRHDRC PVCQDRHC HQSITEQVVM CEFTRESCH FTEDCURCEFCD SWQS QHC CYSHCACVM PQIEZRV. ETH QGQIE ID SWCHC QEMTEC XWT VTKCD TH PRHDRCD TH LCDIHCD ST TBSQIE PQIE TZ ISDCVZ, BCFQRDC IS ID PQIE, BRS TFFQDITEQVVM FIHFRADSQEFCD TFFRH IE XWIFW STIV QEL PQIE FQE PHTFRHC WIA DTAC GHCQS PVCQDRHC. ST SQJC Q SHIKIQV CYQAPVC, XWIFW TZ RD CKCH RELCHSQJCD VQBTHITRD PWMDIFQV CYCHFIDC, CYFCPS ST TBSQIE DTAC QLKQESQGC ZHTA IS? BRS XWT WQD QEM HIGWS ST ZIEL ZQRVS XISW Q AQE XWT FWTTDCD ST CEOTM Q PVCQDRHC SWQS WQD ET QEETMIEG FTEDCURCEFCD, TH TEC XWT QKTILD Q PQIE SWQS PHTLRFCD ET HCDRVSQES PVCQDRHC? TE SWC TSWCH WQEL, XC LCETREFC XISW HIGWSCTRD IELIGEQSITE QEL LIDVIJC ACE XWT QHC DT BCGRIVCL QEL LCATHQVINCL BM SWC FWQHAD TZ PVCQDRHC TZ SWC ATACES, DT BVIELCL BM LCDIHC, SWQS SWCM FQEETS ZTHCDCC SWC PQIE QEL SHTRBVC SWQS QHC BTREL ST CEDRC; QEL CURQV BVQAC BCVTEGD ST SWTDC XWT ZQIV IE SWCIH LRSM SWHTRGW XCQJECDD TZ XIVV, XWIFW ID SWC DQAC QD DQMIEG SWHTRGW DWHIEJIEG ZHTA STIV QEL PQIE. SWCDC FQDCD QHC PCHZCFSVM DIAPVC QEL CQDM ST LIDSIEGRIDW. IE Q ZHCC WTRH, XWCE TRH PTXCH TZ FWTIFC ID RESHQAACVVCL QEL XWCE ETSWIEG PHCKCESD TRH BCIEG QBVC ST LT XWQS XC VIJC BCDS, CKCHM PVCQDRHC ID ST BC XCVFTACL QEL CKCHM PQIE QKTILCL. BRS IE FCHSQIE FIHFRADSQEFCD QEL TXIEG ST SWC FVQIAD TZ LRSM TH SWC TBVIGQSITED TZ BRDIECDD IS XIVV ZHCURCESVM TFFRH SWQS PVCQDRHCD WQKC ST BC HCPRLIQSCL QEL QEETMQEFCD QFFCPSCL. SWC XIDC AQE SWCHCZTHC QVXQMD WTVLD IE SWCDC AQSSCHD ST SWID PHIEFIPVC TZ DCVCFSITE: WC HCOCFSD PVCQDRHCD ST DCFRHC TSWCH GHCQSCH PVCQDRHCD, TH CVDC WC CELRHCD PQIED ST QKTIL XTHDC PQIED";
+
+        //TODO Try to get alphabet declaration into a beforeAll()
+
+        @BeforeEach
+        void beforeEach() {
+            alphabet.put('A', 'Q');
+            alphabet.put('B', 'B');
+            alphabet.put('C', 'F');
+            alphabet.put('D', 'L');
+            alphabet.put('E', 'C');
+            alphabet.put('F', 'Z');
+            alphabet.put('G', 'G');
+            alphabet.put('H', 'W');
+            alphabet.put('I', 'I');
+            alphabet.put('J', 'O');
+            alphabet.put('K', 'J');
+            alphabet.put('L', 'V');
+            alphabet.put('M', 'A');
+            alphabet.put('N', 'E');
+            alphabet.put('O', 'T');
+            alphabet.put('P', 'P');
+            alphabet.put('Q', 'U');
+            alphabet.put('R', 'H');
+            alphabet.put('S', 'D');
+            alphabet.put('T', 'S');
+            alphabet.put('U', 'R');
+            alphabet.put('V', 'K');
+            alphabet.put('W', 'X');
+            alphabet.put('X', 'Y');
+            alphabet.put('Y', 'M');
+            alphabet.put('Z', 'N');
+
+            mASCipher = new MonoAlphabeticSubstitutionCipher();
+            mASCipher.setParams(alphabet);
+        }
+
+        @Test
+        void encryptShort() {
+            Assertions.assertEquals(shortCipher, mASCipher.encryptCall(shortPlain));
+        }
+
+        @Test
+        void encryptMid() {
+            Assertions.assertEquals(midCipher, mASCipher.encryptCall(midPlain));
+        }
+
+        @Test
+        void encryptLong() {
+            Assertions.assertEquals(longCipher, mASCipher.encryptCall(longPlain));
+        }
+
+        @Test
+        void decryptShort() {
+            Assertions.assertEquals(shortPlain, mASCipher.decryptCall(shortCipher));
+        }
+
+        @Test
+        void decryptMid() {
+            Assertions.assertEquals(midPlain, mASCipher.decryptCall(midCipher));
+        }
+
+        @Test
+        void decryptLong() {
+            Assertions.assertEquals(longPlain, mASCipher.decryptCall(longCipher));
+        }
+    }
+
 }
