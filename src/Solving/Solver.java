@@ -6,7 +6,7 @@ public abstract class Solver {
     private String cipherText;
     private ArrayList<String> knownWords;
     private ArrayList<String> possibleWords;
-    private ArrayList<String> possibleResults;
+    private ArrayList<String> possibleResults = new ArrayList<>();
     private int possiblilityDepth;
 
     public abstract String getSettingsDescription();
@@ -38,6 +38,7 @@ public abstract class Solver {
     }
 
     public ArrayList<String> getPossibleResults() {
+        System.out.println("debug: "+possibleResults);
         return possibleResults;
     }
 

@@ -37,10 +37,17 @@ public class CaeserSolver extends Solver{
         if(possibles.size()!=1){
             System.out.println("pruning");
             prune(possibles);
+        } else {
+
+            List entries = new ArrayList(possibles.entrySet());
+            //TODO keys too
+
+            addPossibleResult((String) entries.get(0));
         }
         System.out.println("66");
-        setBestSolutionConfig(getKeyFromVal(getPossibleResults().get(0), possibles));
+        //setBestSolutionConfig(getKeyFromVal(getPossibleResults().get(0), possibles));
         System.out.println("88");
+        System.out.println("returning: "+getPossibleResults().get(0));
         return getPossibleResults().get(0);
 
     }
@@ -70,6 +77,7 @@ public class CaeserSolver extends Solver{
         }
 
 
+        System.out.println("at prune : ");
         setPossibleResults(getTopN(rankedPossibilites));
 
         return getPossibleResults();
