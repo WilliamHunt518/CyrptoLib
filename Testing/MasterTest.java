@@ -1,5 +1,6 @@
 import Cryptography.CaeserCipher;
 import Cryptography.MonoAlphabeticSubstitutionCipher;
+import Solving.CaeserSolver;
 import org.junit.jupiter.api.*;
 
 import java.util.HashMap;
@@ -16,6 +17,7 @@ public class MasterTest {
     @DisplayName("Tests for Caeser cipher")
     class CaeserTests {
         private CaeserCipher caeserCipher;
+        private CaeserSolver caeserSolver;
         private int shift = 14;
         private String shortCipher = "VSZZC KCFZR";
         private String midCipher = "WT O AOQVWBS WG SLDSQHSR HC PS WBTOZZWPZS, WH QOBBCH OZGC PS WBHSZZWUSBH";
@@ -25,6 +27,8 @@ public class MasterTest {
         void beforeEach(){
             caeserCipher = new CaeserCipher();
             caeserCipher.setParams(shift);
+
+            caeserSolver = new CaeserSolver();
         }
 
         @Test
@@ -55,6 +59,38 @@ public class MasterTest {
         @Test
         void decryptLong() {
             Assertions.assertEquals(longPlain, caeserCipher.decryptCall(longCipher));
+        }
+
+        @Test
+        void solveShort(){
+            caeserSolver.addKnownWord("HELLO");
+            Assertions.assertEquals(shortPlain, caeserSolver.solveCall(shortCipher));
+            Assertions.assertEquals(shift, caeserSolver.getBestSolutionConfig());
+        }
+
+        @Test
+        void solveMid(){
+            caeserSolver.addKnownWord("INTELLIGENT");
+            Assertions.assertEquals(midPlain, caeserSolver.solveCall(midCipher));
+            Assertions.assertEquals(shift, caeserSolver.getBestSolutionConfig());
+        }
+
+        @Test
+        void solveLong(){
+            caeserSolver.addKnownWord("DENOUNCING");
+            caeserSolver.addKnownWord("CIRCUMSTANCES");
+            Assertions.assertEquals(longPlain, caeserSolver.solveCall(longCipher));
+            Assertions.assertEquals(shift, caeserSolver.getBestSolutionConfig());
+        }
+
+        @Test
+        void gracefulFailure(){
+            try {
+                caeserSolver.addKnownWord("####");
+                Assertions.assertNotEquals(longPlain, caeserSolver.solveCall(longCipher));
+            } catch (Exception e) {
+                Assertions.assertTrue(true);
+            }
         }
     }
 

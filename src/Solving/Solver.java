@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public abstract class Solver {
     private String cipherText;
-    private ArrayList<String> knownWords;
-    private ArrayList<String> possibleWords;
+    private ArrayList<String> knownWords = new ArrayList<>();
+    private ArrayList<String> possibleWords= new ArrayList<>();
     private ArrayList<String> possibleResults = new ArrayList<>();
     private int possiblilityDepth;
 
@@ -29,6 +29,10 @@ public abstract class Solver {
         this.knownWords = knownWords;
     }
 
+    public void addKnownWord(String knownWord){
+        this.knownWords.add(knownWord);
+    }
+
     public ArrayList<String> getPossibleWords() {
         return possibleWords;
     }
@@ -38,7 +42,6 @@ public abstract class Solver {
     }
 
     public ArrayList<String> getPossibleResults() {
-        System.out.println("debug: "+possibleResults);
         return possibleResults;
     }
 

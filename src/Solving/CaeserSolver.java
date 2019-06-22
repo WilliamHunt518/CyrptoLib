@@ -17,37 +17,31 @@ public class CaeserSolver extends Solver{
     @Override
     public String solveCall(String cipherText) {
         HashMap<Integer, String> possibles = new HashMap<>();
+        String firstFound="";
         for(int i=0; i<26; i++){
-
             CaeserCipher caeserCipher = new CaeserCipher();
             caeserCipher.setParams(i);
             String plainText = caeserCipher.decryptCall(cipherText);
-            System.out.println("-With i="+i+" solution is: "+plainText);
-            System.out.println("---Checking possibility for words:");
-            for(String knownWord : getKnownWords()){
-                System.out.println("="+knownWord);
-                System.out.println(plainText.contains(knownWord));
-            }
+            //System.out.println("-With i="+i+" solution is: "+plainText);
+            //System.out.println("---Checking possibility for words:");
+
             if(checkSolutionPossible(plainText)){
+                if(firstFound.equals("")){
+                    firstFound=plainText;
+                }
                 possibles.put(i, plainText);
             }
-            System.out.println("ss = "+possibles.size());
         }
-        System.out.println("55");
-        if(possibles.size()!=1){
-            System.out.println("pruning");
+        if(possibles.size()==0) {
+            System.out.println("No sol'n found");
+            return null;
+        } else if(possibles.size()!=1) {
+            System.out.println("Pruning");
             prune(possibles);
         } else {
-
-            List entries = new ArrayList(possibles.entrySet());
-            //TODO keys too
-
-            addPossibleResult((String) entries.get(0));
+            addPossibleResult(firstFound);
         }
-        System.out.println("66");
-        //setBestSolutionConfig(getKeyFromVal(getPossibleResults().get(0), possibles));
-        System.out.println("88");
-        System.out.println("returning: "+getPossibleResults().get(0));
+        setBestSolutionConfig(getKeyFromVal(getPossibleResults().get(0), possibles));
         return getPossibleResults().get(0);
 
     }
