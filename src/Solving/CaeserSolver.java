@@ -42,6 +42,37 @@ public class CaeserSolver extends Solver{
             addPossibleResult(firstFound);
         }
         setBestSolutionConfig(getKeyFromVal(getPossibleResults().get(0), possibles));
+         return getPossibleResults().get(0);
+
+    }
+
+    public String partialSolveCall(String cipherText) {
+        HashMap<Integer, String> possibles = new HashMap<>();
+        String firstFound="";
+        for(int i=0; i<26; i++){
+            CaeserCipher caeserCipher = new CaeserCipher();
+            caeserCipher.setParams(i);
+            String plainText = caeserCipher.decryptCall(cipherText);
+            //System.out.println("-With i="+i+" solution is: "+plainText);
+            //System.out.println("---Checking possibility for words:");
+
+            if(checkSolutionPossible(plainText)){
+                if(firstFound.equals("")){
+                    firstFound=plainText;
+                }
+                possibles.put(i, plainText);
+            }
+        }
+        if(possibles.size()==0) {
+            System.out.println("No sol'n found");
+            return null;
+        } else if(possibles.size()!=1) {
+            System.out.println("Pruning");
+            prune(possibles);
+        } else {
+            addPossibleResult(firstFound);
+        }
+        setBestSolutionConfig(getKeyFromVal(getPossibleResults().get(0), possibles));
         return getPossibleResults().get(0);
 
     }
@@ -102,10 +133,10 @@ public class CaeserSolver extends Solver{
             sortedByValue.put(entry.getKey(), entry.getValue());
         }
 
-        System.out.println("HashMap after sorting entries by values ");
+        //System.out.println("HashMap after sorting entries by values ");
         Set<Map.Entry<String, Integer>> entrySetSortedByValue = sortedByValue.entrySet();
 
-        for(Map.Entry<String, Integer> mapping : entrySetSortedByValue){
+        for(Map.Entry<String, Integer> mapping : listOfEntries){
             System.out.println(mapping.getKey() + " ==> " + mapping.getValue());
         }
 
@@ -113,7 +144,9 @@ public class CaeserSolver extends Solver{
         //SORTED
         ArrayList<String> topNPossibilities = new ArrayList<>();
         for(int i = 0; i < getPossiblilityDepth(); i++){
-            topNPossibilities.add(listOfEntries.get(i).getKey());
+            // i from 0 -> e.g. 4
+            int index = (listOfEntries.size() - 1) - i; // Produces index using complement instead of reversing the entire list
+            topNPossibilities.add(listOfEntries.get(index).getKey());
         }
 
         return topNPossibilities;

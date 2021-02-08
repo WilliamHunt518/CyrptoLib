@@ -28,14 +28,6 @@ public class MonoAlphabeticSubstitutionSolver extends Solver{
 
         }
 
-
-
-
-
-
-
-
-
         return null;
 
 

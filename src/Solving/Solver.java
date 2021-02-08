@@ -41,6 +41,10 @@ public abstract class Solver {
         this.possibleWords = possibleWords;
     }
 
+    public void addPossibleWord(String possibleWord){
+        this.possibleWords.add(possibleWord);
+    }
+
     public ArrayList<String> getPossibleResults() {
         return possibleResults;
     }

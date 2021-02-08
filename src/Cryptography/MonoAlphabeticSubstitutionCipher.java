@@ -50,18 +50,20 @@ public class MonoAlphabeticSubstitutionCipher extends Cryptor{
     }
 
     private char translateC2P(char cipher) {
+        System.out.println("Trying: " + cipher);
 
         Iterator it = getAlphabet().entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
+            int b  = 2;
 
-            if(pair.getValue().equals(cipher)){
-                return (char) pair.getKey();
+            if(pair.getKey().equals(cipher)){
+                return (char) pair.getValue();
             }
 
             //it.remove(); // avoids a ConcurrentModificationException [although no multithreading here so unreq'd]
         }
-        System.out.println();
+        System.out.println("failed: " + cipher);
         return '#';
     }
 
@@ -69,7 +71,38 @@ public class MonoAlphabeticSubstitutionCipher extends Cryptor{
         return alphabet;
     }
 
-    public void setAlphabet(HashMap<Character, Character> alphabet) {
-        this.alphabet = alphabet;
+    public void setAlphabet(HashMap<Character, Character> inputAlphabet) {
+        alphabet = new HashMap<>();
+        alphabet.put('A', 'A');
+        alphabet.put('B', 'B');
+        alphabet.put('C', 'C');
+        alphabet.put('D', 'D');
+        alphabet.put('E', 'E');
+        alphabet.put('F', 'F');
+        alphabet.put('G', 'G');
+        alphabet.put('H', 'H');
+        alphabet.put('I', 'I');
+        alphabet.put('J', 'J');
+        alphabet.put('K', 'K');
+        alphabet.put('L', 'L');
+        alphabet.put('M', 'M');
+        alphabet.put('N', 'N');
+        alphabet.put('O', 'O');
+        alphabet.put('P', 'P');
+        alphabet.put('Q', 'Q');
+        alphabet.put('R', 'R');
+        alphabet.put('S', 'S');
+        alphabet.put('T', 'T');
+        alphabet.put('U', 'U');
+        alphabet.put('V', 'V');
+        alphabet.put('W', 'W');
+        alphabet.put('X', 'X');
+        alphabet.put('Y', 'Y');
+        alphabet.put('Z', 'Z');
+
+        for (Map.Entry<Character, Character> mapping : inputAlphabet.entrySet()){
+            alphabet.put(mapping.getKey(), mapping.getValue());
+        }
+        int a = 2;
     }
 }
