@@ -50,12 +50,10 @@ public class MonoAlphabeticSubstitutionCipher extends Cryptor{
     }
 
     private char translateC2P(char cipher) {
-        System.out.println("Trying: " + cipher);
 
         Iterator it = getAlphabet().entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
-            int b  = 2;
 
             if(pair.getKey().equals(cipher)){
                 return (char) pair.getValue();
@@ -63,7 +61,6 @@ public class MonoAlphabeticSubstitutionCipher extends Cryptor{
 
             //it.remove(); // avoids a ConcurrentModificationException [although no multithreading here so unreq'd]
         }
-        System.out.println("failed: " + cipher);
         return '#';
     }
 
@@ -103,6 +100,5 @@ public class MonoAlphabeticSubstitutionCipher extends Cryptor{
         for (Map.Entry<Character, Character> mapping : inputAlphabet.entrySet()){
             alphabet.put(mapping.getKey(), mapping.getValue());
         }
-        int a = 2;
     }
 }

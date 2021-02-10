@@ -2,7 +2,7 @@ package Tools;
 
 import Cryptography.MonoAlphabeticSubstitutionCipher;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class Subber{
 
@@ -15,7 +15,30 @@ public class Subber{
         MASCipher = new MonoAlphabeticSubstitutionCipher();
 
         alphabet.put('Y', 'e');
+        alphabet.put('D', 'a');
+        alphabet.put('N', 'o');
         alphabet.put('I', 't');
+        alphabet.put('V', 'h');
+        alphabet.put('U', 'i');
+        alphabet.put('K', 'r');
+        alphabet.put('X', 'f');
+        alphabet.put('O', 'n');
+        alphabet.put('J', 's');
+        alphabet.put('M', 'p');
+        alphabet.put('Q', 'l');
+        alphabet.put('P', 'm');
+        alphabet.put('C', 'y');
+        alphabet.put('G', 'v');
+        alphabet.put('Z', 'd');
+        alphabet.put('S', 'c');
+        alphabet.put('H', 'u');
+        alphabet.put('W', 'g');
+        alphabet.put('A', 'b');
+        alphabet.put('E', 'x');
+        alphabet.put('F', 'w');
+        alphabet.put('R', 'k');
+        alphabet.put('B', 'z');
+        alphabet.put('L', 'q');
 
 
         MASCipher.setParams(alphabet);
@@ -23,8 +46,45 @@ public class Subber{
         System.out.println(MASCipher.decryptCall(cipherText));
     }
 
+    public void runFreqAnalysis(){
+        HashMap<Character, Integer> freq = new HashMap<>(26);
+        String myCipherText=cipherText.replaceAll("\\s+","");
+        for(int i=0; i<myCipherText.length(); i++){
+            Character c = myCipherText.charAt(i) ;
+            Integer currentCount = freq.get(c);
+            if (currentCount != null) {
+                freq.put(c, new Integer(currentCount + 1));
+            }
+            else {
+                freq.put(c, 1);
+            }
+
+        }
+
+        Comparator<Map.Entry<Character, Integer>> valueComparator = new Comparator<Map.Entry<Character, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Character, Integer> e1, Map.Entry<Character, Integer> e2) {
+                Integer v1 = e1.getValue();
+                Integer v2 = e2.getValue();
+                return v2.compareTo(v1);
+            }
+        };
+
+        List<Map.Entry<Character, Integer>> listOfEntries = new ArrayList<Map.Entry<Character, Integer>>(freq.entrySet());
+
+        // sorting HashMap by values using comparator
+        Collections.sort(listOfEntries, valueComparator);
+
+
+        System.out.println("here");
+        for(Map.Entry<Character, Integer> mapping : listOfEntries){
+            System.out.println(mapping.getKey() + " ==> " + mapping.getValue());
+        }
+    }
+
     public static void main(String[] args) {
         Subber subber = new Subber();
+        //subber.runFreqAnalysis();
         subber.run();
     }
 

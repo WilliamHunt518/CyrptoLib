@@ -38,9 +38,8 @@ public class CaeserCipher extends Cryptor{
 
     }
 
-    private char shift(char c, int shiftFactor) {
-        int ascChar = (int) c;
-        int newAscChar = ascChar+shiftFactor;
+    protected char shift(char c, int shiftFactor) {
+        int newAscChar = (int) c + shiftFactor;
         if(newAscChar>90){
             newAscChar-=26;
         } else if(newAscChar<65){
@@ -49,5 +48,12 @@ public class CaeserCipher extends Cryptor{
         return (char) newAscChar;
     }
 
+    protected char shift(char c) {
+        return shift(c, shiftFactor);
+    }
+
+    protected char antiShift(char c){
+        return shift(c, -shiftFactor);
+    }
 
 }
