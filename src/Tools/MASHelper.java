@@ -4,7 +4,7 @@ import Cryptography.MonoAlphabeticSubstitutionCipher;
 
 import java.util.*;
 
-public class Subber{
+public class MASHelper {
 
     private MonoAlphabeticSubstitutionCipher MASCipher;
     private HashMap<Character, Character> alphabet = new HashMap<>();
@@ -83,9 +83,9 @@ public class Subber{
     }
 
     public static void main(String[] args) {
-        Subber subber = new Subber();
+        MASHelper MASHelper = new MASHelper();
         //subber.runFreqAnalysis();
-        subber.run();
+        MASHelper.run();
     }
 
 

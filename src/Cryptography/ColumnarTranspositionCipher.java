@@ -103,7 +103,28 @@ public class ColumnarTranspositionCipher extends Cryptor{
 
     @Override
     protected void decrypt() throws Exception {
+        int groupLen = (int) Math.ceil(getCipherText().length() / key.length());
 
+        StringBuilder[] columns = new StringBuilder[key.length()];
+        for (int i = 0; i<key.length(); i++){
+            columns[i] = new StringBuilder();
+        }
+
+
+        Integer[] indexOrders = calculateIndexOrders(key);
+        StringBuilder finalBuilder = new StringBuilder();
+
+        for(int groupIndex=0; groupIndex<groupLen ; groupIndex++) {
+            for(int sublistIndex : indexOrders) {
+                finalBuilder.append(getCipherText().toCharArray()[groupIndex + (sublistIndex * groupLen)]);
+            }
+        }
+
+
+
+
+
+        setPlainText(finalBuilder.toString());
     }
 
 }

@@ -21,8 +21,10 @@ public class MainTest {
 
         ColumnarTranspositionCipher columnarTranspositionCipher = new ColumnarTranspositionCipher();
         columnarTranspositionCipher.setup("Destiny");
-        columnarTranspositionCipher.encryptCall("attack postponed until two");
-        System.out.println(columnarTranspositionCipher.getCipherText());
+        //columnarTranspositionCipher.encryptCall("attack postponed until two");
+        //System.out.println(columnarTranspositionCipher.getCipherText());
+        columnarTranspositionCipher.decryptCall("AODWTSUOCOIVKNLDTTNLAPTHPETL");
+        System.out.println(columnarTranspositionCipher.getPlainText());
 
     }
 
