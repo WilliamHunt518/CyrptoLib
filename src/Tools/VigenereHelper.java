@@ -6,11 +6,18 @@ import Cryptography.VigenereCipher;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 public class VigenereHelper {
     private VigenereCipher vigenereCipher;
 
-    private String cipherText = "qhc jeqpaeb srxrrp hcoe pbccktjv hyoduxrc qrmgalp hyse yqtpxcrbd ree yqtcktgln mc gmsepkmcktq xnb oeqbapzhcos mke mc tfb myfn alnabrlp iq qhyq ilqeeoarbd afrarirp il jijftyoy mo cpftgzaj fndoaqqrsztsoe ympjfcyqimks aluja bc jajfcgluqiy kxngmujxtca dsoild tfb mykudxcrrrgkg nooabsq thgzh mctck tyheq mlyze yyrmxd flwcsep pilze reepb hyse zbel ko pbpmotca hyoduxrc qrmgalp il mryztgze wbt jftrie gp kllwl xbmrt flw qrcf x tpljyk wmrlb iomh lghe ykd flw fxrb qo gjpjbmckt mke gk ppxcrfcc lnc bxyjpjb iq aonxnr qrmgal qhgp cyk bc rsca tm zokmrmjiqb tfb sczupftw lf y jeykildfsi rcxl ulrja tyogcq wfflc xvmfdgkg bbtcztgln zv fskcrfolxl rbsrfne xs ublj xs roohxn bbtcztgln kbcfxngpmq  puae tpljyks axn zb uqbd rl eqqaziiqe a ffdbbn qfdc zhyknci il xn mqhcowgpe qfdc zhyknci rcpiqqalq dcpiek tffs roohxn bleq kor zhykgc qhc ioefc txlsb od xnw darb bsq ilptcxd aealdeq lnjv tfb pmtep mrmcijb od qwm darbs yk etxlsxtmo wfl iq kor xwyoe mc tfb tpljyk cyknmq arqaah tfb tpljyk dcpiek uqfne zokjol pibb cfxnlbl yqtyzkq qhc lwlbr mc tfb tpljyk hmtetbr axn spe ffs ikouiebde mc tfb tpljyk pmtep jobbl rl eqqaziiqe a ffdbbn qfdc zhyknci tfxt pblgxbjv lcxkq lur peaoer hewp tffs gp tfb ela od qhc jeqpaeb";
+    private String cipherText;
     private ArrayList<String> commonWords = new ArrayList<>();
+
+    private ArrayList<String> possKeys;
+
+    public VigenereHelper(String cipherText){
+        this.cipherText = cipherText.replaceAll("[^a-zA-Z ]", "").toUpperCase();
+    }
 
 
     public void printWordFreq(){
@@ -49,8 +56,12 @@ public class VigenereHelper {
     }
 
     public void runFreqAnalysis(){
+        runFreqAnalysis(cipherText);
+    }
+
+    public void runFreqAnalysis(String cipherTextArg){
         HashMap<Character, Integer> freq = new HashMap<>(26);
-        String myCipherText=cipherText.replaceAll("\\s+","");
+        String myCipherText=cipherTextArg.replaceAll("\\s+","");
         for(int i=0; i<myCipherText.length(); i++){
             Character c = myCipherText.charAt(i) ;
             Integer currentCount = freq.get(c);
@@ -156,6 +167,9 @@ public class VigenereHelper {
         }
     }
 
+    /***
+     * Taken from an online source
+     */
     static int gcd(int a, int b)
     {
         if (a == 0)
@@ -163,8 +177,9 @@ public class VigenereHelper {
         return gcd(b % a, a);
     }
 
-    // Function to find gcd of array of
-    // numbers
+    /***
+     * Taken from an online source
+     */
     static int findGCD(ArrayList<Integer> arr)
     {
         int result = 0;
@@ -176,19 +191,149 @@ public class VigenereHelper {
                 return 1;
             }
         }
-
         return result;
+    }
+
+    public void printSubFreqTables(int period){
+        ArrayList<StringBuilder> stringBuilders = new ArrayList<>();
+        String myCipherText=cipherText.replaceAll("\\s+","");
+
+        ArrayList<Character> chars = new ArrayList<>(
+                myCipherText.chars()
+                        .mapToObj(e -> (char) e)
+                        .collect(
+                                Collectors.toList()
+                        )
+        );
+
+        for (int i=0; i< period; i++){
+            StringBuilder sb = new StringBuilder();
+            stringBuilders.add(sb);
+        }
+
+        for (int i=0; i < myCipherText.length(); i++){
+            char thisChar = chars.get(i);
+
+            stringBuilders.get(i % period).append(thisChar);
+
+        }
+
+        for (int i=0; i< period; i++){
+            System.out.println();
+            System.out.println("i = "+ i);
+            System.out.println();
+            runFreqAnalysis(stringBuilders.get(i).toString());
+        }
+
+
+    }
+
+    /*private int dictHeuristic(){
+
+    }
+
+    public int evaluateAttempt(String key){
+        vigenereCipher.setup(key);
+        String result = vigenereCipher.decryptCall(vigenereCipher.getPlainText());
+
+        return dictHeuristic(result);
+    }
+    */
+
+    /***
+     * Taken from https://stackoverflow.com/questions/17192796/generate-all-combinations-from-multiple-lists
+     */
+    private void generatePermutations(List<List<Character>> lists, List<String> possKeys, int depth, String current) {
+        if (depth == lists.size()) {
+            possKeys.add(current);
+            return;
+        }
+
+        for (int i = 0; i < lists.get(depth).size(); i++) {
+            generatePermutations(lists, possKeys, depth + 1, current + lists.get(depth).get(i));
+        }
+    }
+
+    private String mapKey(String key, char base){
+        StringBuilder newKey = new StringBuilder();
+
+        for (char c : key.toCharArray()){
+            // e.g. We assume E (69) --> B (66)
+            // ==> shift = (66 - 69) = -3
+            // ==> thisChar = A - 3 = X
+
+            int shift = c - base;  // ASCII of this char - base
+            if (shift < 0){
+                shift += 26;  // resets if negative
+            }
+            char thisChar = (char) (shift + 65);  // maps back to char
+            newKey.append(thisChar);
+        }
+        return newKey.toString();
+    }
+
+    /***
+     * We assume that E is used as base. This can be customized later
+     */
+    public void fuzzOptions(ArrayList<List<Character>> options){
+        //options = new char[][]{new char[]{'B', 'K', 'X'}, new char[]{'T', 'E'}, new char[]{'C', 'Y'}};
+
+
+
+        List<String> possKeys = new ArrayList<String>();
+
+
+        generatePermutations(options, possKeys, 0, "");
+
+        System.out.println(possKeys.toString());
+
+        ArrayList<String> mappedKeys = new ArrayList<>();
+        for (String key : possKeys){
+            mappedKeys.add(mapKey(key, 'E'));
+        }
+
+        System.out.println(mappedKeys.toString());
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        for (String key : mappedKeys){
+            vigenereCipher = new VigenereCipher();
+            vigenereCipher.setup(key);
+            vigenereCipher.setCipherText(cipherText);
+            String result = vigenereCipher.decryptCall(vigenereCipher.getCipherText());
+            System.out.println("==========================================================================");
+            System.out.println("For key: " + key);
+            System.out.println(result);
+            System.out.println();
+        }
+
+
+
+
     }
 
 
 
     public static void main(String[] args) {
-        VigenereHelper vigenereHelper = new VigenereHelper();
+        VigenereHelper vigenereHelper = new VigenereHelper("Oaxkdwsf kldwxvov odoeofdsbq curgyd kl dzo Deadhydn Yiexscaee sf Wmxamz. Rw oftgiwn uvscksukd wmcam sxv zdkqov dzo nsgvax. Zyoonoj, rw pwvl kdswxsdwn sxv clbmqyvwn oslr lrw baqan Hbmckssx wnmmsdayf rw bwmwsnov dzojo. Zo svky whhojswxuov k kzwour vsxpammvli, s cdyo msnwxuo ax zsk chosuaxy gzojo zo’v zseko ly uyfcanwb orsd ly kkq xwhl. Sf vsdwb qosbk, Oaxkdwsf ggedn obadw ktymd lgg onofdk dzkl rsn s wsbcov oxpwml yf rac uravvrgyv. Yfo okk kf ofmgefdwb oslr s mgwhkkc sd sqw pafw, gzojo zo ekjfwvwn sd lrw sffacaldo xyjmwc lrsd lejxwn lrw xwovvw. Dzo gdzoj gsc sd sqw 12, gzof rw nacuynojov k tygu gp yogwwdji oramz rw bwkv ynoj kfn gfwb");
         vigenereHelper.printWordFreq();
         System.out.println();
         vigenereHelper.runFreqAnalysis();
         System.out.println();
         vigenereHelper.generateGCDTable();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        vigenereHelper.printSubFreqTables(2);
+        System.out.println();
+        System.out.println();
+        ArrayList<List<Character>> options = new ArrayList<List<Character>>();
+        options.add(Arrays.asList('O', 'D', 'R', 'X', 'Y'));
+        options.add(Arrays.asList('W', 'S', 'A', 'L', 'F'));
+        vigenereHelper.fuzzOptions(options);
+
     }
 
 }
