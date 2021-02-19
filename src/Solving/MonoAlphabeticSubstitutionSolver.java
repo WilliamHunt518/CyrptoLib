@@ -14,6 +14,8 @@ public class MonoAlphabeticSubstitutionSolver extends Solver{
     //private
     private HashMap<Character, Character> bestSolutionConfig;
 
+    String[] possWords = {"AND", "THE", "BE", "TO", "OF", "A", "IN", "THAT", "HAVE", "I", "IT", "IS", "AN"};  //some common english stopwords
+
     @Override
     public String getSettingsDescription() {
         return null;
@@ -58,97 +60,6 @@ public class MonoAlphabeticSubstitutionSolver extends Solver{
 
 
     }
-
-
-
-    /*
-
-
-
-
-    @Override
-    public String solveCall(String cipherText) {
-        HashMap<HashMap<Character, Character>, String> possibles = new HashMap<>();
-        String firstFound="";
-        ArrayList<HashMap<Character, Character>> allMaps = generateAllMaps();
-
-
-//cmt
-        for(int i=0; i<26; i++){
-            MonoAlphabeticSubstitutionCipher mAS = new MonoAlphabeticSubstitutionCipher();
-            caeserCipher.setParams(i);
-            String plainText = caeserCipher.decryptCall(cipherText);
-            //System.out.println("-With i="+i+" solution is: "+plainText);
-            //System.out.println("---Checking possibility for words:");
-
-            if(checkSolutionPossible(plainText)){
-                if(firstFound.equals("")){
-                    firstFound=plainText;
-                }
-                possibles.put(i, plainText);
-            }
-        }
-        if(possibles.size()==0) {
-            System.out.println("No sol'n found");
-            return null;
-        } else if(possibles.size()!=1) {
-            System.out.println("Pruning");
-            prune(possibles);
-        } else {
-            addPossibleResult(firstFound);
-        }
-        setBestSolutionConfig(getKeyFromVal(getPossibleResults().get(0), possibles));
-        return getPossibleResults().get(0);
-
-//endcmt
-
-        return null;
-
-    }
-
-    public void tempMain(){
-        System.out.println(generateAllMaps());
-    }
-
-    private ArrayList<HashMap<Character,Character>> generateAllMaps() {
-        Function<Integer, Integer> mapListSizeGetter = MonoAlphabeticSubstitutionSolver::factorial;
-        ArrayList<HashMap<Character, Character>> allMaps = new ArrayList<>();                                            //(mapListSizeGetter.apply(masterAlphabet.length));
-        for(Character c : masterAlphabet) {
-            allMaps.add(new HashMap<>(c,c));
-        }
-        //System.out.println(allMaps.size());
-        for(int i=0; i<masterAlphabet.length;i++) {
-            allMaps=buildMaps(i, allMaps);
-        }
-        return allMaps;
-
-    }
-
-
-    private ArrayList<HashMap<Character, Character>> buildMaps(int deltaIndex, ArrayList<HashMap<Character, Character>> builder) {
-        System.out.println("DBG - @ buildMaps call for delta="+deltaIndex+" size of builder: "+builder.size());
-        //Function<Integer, Integer> mapListSizeGetter = MonoAlphabeticSubstitutionSolver::factorial;
-        ArrayList<HashMap<Character, Character>> newBuilder = new ArrayList<>();
-        for(HashMap<Character, Character> possibilityToChange : builder){
-            for(char alpha : masterAlphabet){
-                HashMap<Character, Character> duplicatedPossibility = (HashMap<Character, Character>) possibilityToChange.clone();
-                duplicatedPossibility.put(masterAlphabet[deltaIndex], alpha);
-                newBuilder.add(duplicatedPossibility);
-            }
-        }
-        return newBuilder;
-
-    }
-
-    private static int factorial(int n){
-        if(n==1){
-            return 1;
-        } else {
-            return n*factorial(n-1);
-        }
-    }
-
-    */
 
 
 }

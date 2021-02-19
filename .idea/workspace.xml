@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6586c353-df3f-420c-9659-ef36ec084beb" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solving/MonoAlphabeticSubstitutionSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solving/MonoAlphabeticSubstitutionSolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/CeaserRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/CeaserRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/MASHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/MASHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tools/VigenereHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/VigenereHelper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -180,7 +184,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
-  <component name="RunManager" selected="Application.VigenereHelper">
+  <component name="RunManager" selected="Application.MASHelper">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -294,6 +298,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EvoMASSolver.Main" />
+      <module name="CryptoLib" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="EvoMASSolver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainTest" />
       <module name="CryptoLib" />
@@ -365,16 +383,6 @@
       <setting name="depsClasspath" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="MasterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CryptoLib" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MasterTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -436,11 +444,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.VigenereHelper" />
-        <item itemvalue="Application.MainTest" />
         <item itemvalue="Application.MASHelper" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.VigenereHelper" />
         <item itemvalue="Application.CeaserRunner" />
-        <item itemvalue="JUnit.MasterTest" />
+        <item itemvalue="Application.MainTest" />
       </list>
     </recent_temporary>
   </component>
@@ -461,6 +469,9 @@
       <workItem from="1613059380126" duration="3573000" />
       <workItem from="1613132657530" duration="6658000" />
       <workItem from="1613395975902" duration="4368000" />
+      <workItem from="1613486020314" duration="228000" />
+      <workItem from="1613658916907" duration="10208000" />
+      <workItem from="1613747001938" duration="4214000" />
     </task>
     <servers />
   </component>
@@ -549,12 +560,22 @@
           <line>269</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/EvoMASSolver/XoverGA.java</url>
+          <line>199</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CyrptoLib$Main.ic" NAME="Main Coverage Results" MODIFIED="1613665188658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>EvoMASSolver.*</FILTER>
+    </SUITE>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Cryptography/Cryptor.java">

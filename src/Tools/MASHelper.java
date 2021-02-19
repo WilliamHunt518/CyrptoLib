@@ -9,37 +9,58 @@ public class MASHelper {
     private MonoAlphabeticSubstitutionCipher MASCipher;
     private HashMap<Character, Character> alphabet = new HashMap<>();
 
-    private String cipherText = "Ivy  Yuojiyuo  xdpuqc  uoguiyz  d  mnnk  Mnqujv  pyzusdq  jihzyoi,  Pde  Idqphz  in  snpy  in  ivyuk  vnhjy  xnk  Ivhkjzdc  ygyouow  pydqj.  Idqphz  aysdpy  do  uoxnkpdq  ihink  in  cnhow  Dqayki,  uoiknzhsuow  vup  in  vuwvyk  pdivypdiusj  doz  mvuqnjnmvc.  Noy  nx  ivy  annrj  Idqphz  jvdkyz  fuiv  Dqayki  fdj  d  svuqzkyo’j  jsuyosy annr uo fvusv ivy dhivnk updwuoyz kuzuow dqnowjuzy yqysikusuic ivdi fdj ikdgyquow uojuzy d iyqywkdmv  fuky.  Yuojiyuo  aywdo  in  fnozyk  fvdi  d  quwvi  aydp  fnhqz  qnnr  qury  ux  cnh  snhqz  kho  dqnowjuzy  ui  di  ivy  jdpy  jmyyz.  Ux  quwvi  fyky  d  fdgy,  ivyo  ivy  quwvi  aydp  jvnhqz  dmmydk  jidiunodkc,  qury d xknbyo fdgy. Cyi, uo kydquic, ivy quwvi aydp uj pnguow. Ivuj mdkdzne qyz vup in fkuiy vuj xukji \"jsuyoiuxus  mdmyk\"  di  dwy  16,  \"Ivy  Uogyjiuwdiuno  nx  ivy  Jidiy  nx  Dyivyk  uo  Pdwoyius  Xuyqzj.\"  Ivuj  lhyjiuno  nx  ivy  kyqdiugy  jmyyz  in  ivy  jidiunodkc  najykgyk  doz  ivy  najykgyk  pnguow  fuiv  ivy  quwvi  fdj  d  lhyjiuno ivdi fnhqz znpuodiy vuj ivuoruow xnk ivy oyei 10 cydkj";
+    private String cipherText = "Gvo wuhxfhhulm qogvlw lp gozxvumn, pzuirb xlqqlm um gvo vfqzmuguoh, uh horwlq fhow um omnumooiumn; vldoeoi, ug xzm yo z eoib fhopfr hfkkroqomg um roxgfio xrzhhoh. Um xllkoizgueo nilfkh qlhg lp gvo rozimumn lxxfih dugv hgfwomgh dlisumn glnogvoi um hqzrr nilfkh. Gvuh qogvlw vzh yoom fhow pli gvo omguio xlfiho li zh z hfkkroqomg um roxgfio xrzhhoh. Z eziuogb lp lgvoi qogvlwh hfxv zh kzmorh li woyzgoh xzm yo fhow gl hkzis hgfwomg umgoiohg zmw omxlfizno hgfwomg umelreoqomg.";
 
     public void run(){
         MASCipher = new MonoAlphabeticSubstitutionCipher();
 
-        alphabet.put('Y', 'e');
-        alphabet.put('D', 'a');
-        alphabet.put('N', 'o');
-        alphabet.put('I', 't');
-        alphabet.put('V', 'h');
-        alphabet.put('U', 'i');
-        alphabet.put('K', 'r');
-        alphabet.put('X', 'f');
-        alphabet.put('O', 'n');
-        alphabet.put('J', 's');
-        alphabet.put('M', 'p');
-        alphabet.put('Q', 'l');
-        alphabet.put('P', 'm');
-        alphabet.put('C', 'y');
-        alphabet.put('G', 'v');
-        alphabet.put('Z', 'd');
-        alphabet.put('S', 'c');
-        alphabet.put('H', 'u');
-        alphabet.put('W', 'g');
-        alphabet.put('A', 'b');
-        alphabet.put('E', 'x');
-        alphabet.put('F', 'w');
-        alphabet.put('R', 'k');
-        alphabet.put('B', 'z');
-        alphabet.put('L', 'q');
+        alphabet.put('O', 'e');  // freq analysis
 
+        alphabet.put('G', 't');  // freq analysis
+        alphabet.put('V', 'h');  // follows for "the"
+
+        //ASSUME alphabet.put('Z', 'i');  // standalone
+
+        alphabet.put('Z', 'a');  // standalone// "_e i"  => "be I", "me I", "we I" => None of these make sense, so Z must be A
+        alphabet.put('Y', 'b');  // "_e a"  => "be a"
+
+        alphabet.put('M', 'n');  // "th__ _eth__ ha_ bee_" => "has been" or "had been" (it's unlikely anything else like "beef")
+
+        // "th__", not "that" or "the_" => must be "this"
+        alphabet.put('U', 'i');
+        alphabet.put('H', 's');
+
+        // "_ebates _an be" & "it _an be a"
+        alphabet.put('X', 'c');
+        alphabet.put('W', 'd');  // could be rebates, but unlikely
+
+        // "disc_ssi_n" => "discussion"
+        alphabet.put('F', 'u');
+        alphabet.put('L', 'o');
+
+        // "_ethod" => "method"
+        alphabet.put('Q', 'm');
+
+        // "oP teachin_" => "of teaching"
+        alphabet.put('P', 'f');
+        alphabet.put('N', 'g');
+
+        // "fai___ common" => "fairly common"
+        alphabet.put('I', 'r');
+        alphabet.put('R', 'l');
+        alphabet.put('B', 'y');
+
+        // "_ery" => very
+        alphabet.put('E', 'v');
+
+        // "su__lement" => "Supplement
+        alphabet.put('K', 'p');
+
+        // "_ith"
+        alphabet.put('D', 'w');
+
+        // "wor_ing"
+        alphabet.put('S', 'k');
 
         MASCipher.setParams(alphabet);
 
@@ -84,7 +105,7 @@ public class MASHelper {
 
     public static void main(String[] args) {
         MASHelper MASHelper = new MASHelper();
-        //subber.runFreqAnalysis();
+        MASHelper.runFreqAnalysis();
         MASHelper.run();
     }
 

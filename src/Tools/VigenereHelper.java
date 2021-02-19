@@ -317,7 +317,7 @@ public class VigenereHelper {
 
 
     public static void main(String[] args) {
-        VigenereHelper vigenereHelper = new VigenereHelper("Oaxkdwsf kldwxvov odoeofdsbq curgyd kl dzo Deadhydn Yiexscaee sf Wmxamz. Rw oftgiwn uvscksukd wmcam sxv zdkqov dzo nsgvax. Zyoonoj, rw pwvl kdswxsdwn sxv clbmqyvwn oslr lrw baqan Hbmckssx wnmmsdayf rw bwmwsnov dzojo. Zo svky whhojswxuov k kzwour vsxpammvli, s cdyo msnwxuo ax zsk chosuaxy gzojo zo’v zseko ly uyfcanwb orsd ly kkq xwhl. Sf vsdwb qosbk, Oaxkdwsf ggedn obadw ktymd lgg onofdk dzkl rsn s wsbcov oxpwml yf rac uravvrgyv. Yfo okk kf ofmgefdwb oslr s mgwhkkc sd sqw pafw, gzojo zo ekjfwvwn sd lrw sffacaldo xyjmwc lrsd lejxwn lrw xwovvw. Dzo gdzoj gsc sd sqw 12, gzof rw nacuynojov k tygu gp yogwwdji oramz rw bwkv ynoj kfn gfwb");
+        VigenereHelper vigenereHelper = new VigenereHelper("Gvo wuhxfhhulm qogvlw lp gozxvumn, pzuirb xlqqlm um gvo vfqzmuguoh, uh horwlq fhow um omnumooiumn; vldoeoi, ug xzm yo z eoib fhopfr hfkkroqomg um roxgfio xrzhhoh. Um xllkoizgueo nilfkh qlhg lp gvo rozimumn lxxfih dugv hgfwomgh dlisumn glnogvoi um hqzrr nilfkh. Gvuh qogvlw vzh yoom fhow pli gvo omguio xlfiho li zh z hfkkroqomg um roxgfio xrzhhoh. Z eziuogb lp lgvoi qogvlwh hfxv zh kzmorh li woyzgoh xzm yo fhow gl hkzis hgfwomg umgoiohg zmw omxlfizno hgfwomg umelreoqomg.");
         vigenereHelper.printWordFreq();
         System.out.println();
         vigenereHelper.runFreqAnalysis();
@@ -326,12 +326,13 @@ public class VigenereHelper {
         System.out.println();
         System.out.println();
         System.out.println();
-        vigenereHelper.printSubFreqTables(2);
+        vigenereHelper.printSubFreqTables(3);
         System.out.println();
         System.out.println();
         ArrayList<List<Character>> options = new ArrayList<List<Character>>();
-        options.add(Arrays.asList('O', 'D', 'R', 'X', 'Y'));
-        options.add(Arrays.asList('W', 'S', 'A', 'L', 'F'));
+        options.add(Arrays.asList('O', 'G', 'M', 'L', 'H'));
+        options.add(Arrays.asList('O', 'G', 'H', 'Z', 'U'));
+        options.add(Arrays.asList('H', 'M', 'O', 'I', 'L'));
         vigenereHelper.fuzzOptions(options);
 
     }
