@@ -19,12 +19,14 @@ public class MainTest {
         //System.out.println(vigenereCipher.getPlainText());
 
 
-        //ColumnarTranspositionCipher columnarTranspositionCipher = new ColumnarTranspositionCipher();
-        //columnarTranspositionCipher.setup("Destiny");
-        //columnarTranspositionCipher.encryptCall("attack postponed until two");
-        //System.out.println(columnarTranspositionCipher.getCipherText());
-        //columnarTranspositionCipher.decryptCall("AODWTSUOCOIVKNLDTTNLAPTHPETL");
-        //System.out.println(columnarTranspositionCipher.getPlainText());
+        ColumnarTranspositionCipher columnarTranspositionCipher = new ColumnarTranspositionCipher();
+
+        columnarTranspositionCipher.setup("fdbgcae");
+        columnarTranspositionCipher.decryptCall("rouwrtttitseidlasabirhotoouoetdnmhsreeihmeetswrcethoftittafrsoebfownsltntunee");
+        //columnarTranspositionCipher.decryptCall("abcdefghijklmnopqrstuvwxyzz");
+
+        //System.out.println(columnarTranspositionCipher.runFirstLines("rouwrtttitseidlasabirhotoouoetdnmhsreeihmeetswrcethoftittafrsoebfownsltntunee", 9, 1));
+        System.out.println(columnarTranspositionCipher.getPlainText());
 
 
 

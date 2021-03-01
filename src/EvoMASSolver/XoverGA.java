@@ -11,7 +11,7 @@ import java.util.Random;
 public class XoverGA {
     private Population p;
 
-    String[] possWords = {"AND", "THE", "BE", "TO", "OF", "A", "IN", "THAT", "HAVE", "HAS", "WITH", "I", "IT", "IS", "AN", "METHOD", "TEACHING", "HOWEVER", "TOGETHER"};  //some common english stopwords
+    String[] possWords = {"AND", "THE", "BE", "TO", "OF", "A", "IN", "THAT", "HAVE", "HAS", "WITH", "I", "IT", "IS", "AN", "METHOD", "TEACHING", "HOWEVER", "TOGETHER", "COMMON", "USED", "CLASSES", "INVOLVEMENT", "STUDENT", "ENGINEERING", "SELDOM", "USEFUL", "VARIETY", "GROUPS", "SUPPLEMENT", "LECTURE", "FAIRLY", "SPARK"};  //some common english stopwords
     private String cipher = "Gvo wuhxfhhulm qogvlw lp gozxvumn, pzuirb xlqqlm um gvo vfqzmuguoh, uh horwlq fhow um omnumooiumn; vldoeoi, ug xzm yo z eoib fhopfr hfkkroqomg um roxgfio xrzhhoh. Um xllkoizgueo nilfkh qlhg lp gvo rozimumn lxxfih dugv hgfwomgh dlisumn glnogvoi um hqzrr nilfkh. Gvuh qogvlw vzh yoom fhow pli gvo omguio xlfiho li zh z hfkkroqomg um roxgfio xrzhhoh. Z eziuogb lp lgvoi qogvlwh hfxv zh kzmorh li woyzgoh xzm yo fhow gl hkzis hgfwomg umgoiohg zmw omxlfizno hgfwomg umelreoqomg.";
     char[] letters = "abcdefghijklmnopqrstuvwxyz".toUpperCase().toCharArray();
 
@@ -61,6 +61,7 @@ public class XoverGA {
                 parent1 = indB;
             }
 
+
             //1b. Select another 2 individuals from the population
             Individual indC = p.pick();
             Individual indD = p.pick();
@@ -70,6 +71,20 @@ public class XoverGA {
                 indC = p.pick();
                 indD = p.pick();
             }
+
+/*
+            //TMP. Select the WORST parent from the two and replace (FOR no xover)
+            Individual child = parent1.mutate();
+            if (calculateFitness(indC) < calculateFitness(indD)){
+                p.replace(indC, child);
+            } else {
+                p.replace(indD, child);
+            }
+
+
+ */
+
+
             //2b. Select the BEST parent from the two
             Individual parent2;
             if (calculateFitness(indC) > calculateFitness(indD)){
@@ -78,9 +93,12 @@ public class XoverGA {
                 parent2 = indD;
             }
 
+
             //3. Create a child and mutate it
             Individual child = crossover(parent1, parent2);
             child = child.mutate();
+
+
 
             //4. Choose 2 new Individuals
             Individual indE = p.pick();
@@ -99,6 +117,8 @@ public class XoverGA {
                 p.replace(indE, child);
             }
 
+
+
             int childFitness = calculateFitness(child);
 
 
@@ -107,7 +127,7 @@ public class XoverGA {
                 bestSoln = child;
             }
 
-            if (childFitness == 60){
+            if (bestFitness == 180){
                 done = true;
             }
             index++;
@@ -153,9 +173,18 @@ public class XoverGA {
     }
 
     private HashMap<Character, Character> tryAdd(HashMap<Character, Character> alphabet, char base, char map){
-        if (!alphabet.containsKey(base) && !alphabet.containsValue(map)) {
-            alphabet.put(base, map);
+        //if (!alphabet.containsKey(base) && !alphabet.containsValue(map)) {
+        //    alphabet.put(base, map);
+        //}
+
+        while (alphabet.containsValue(map)){  // while current options are invalid
+            if (map == 'z') {  // base case, reset
+                map = 'a';
+            } else {
+                map = (char) (map + 1);  // try next value
+            }
         }
+        alphabet.put(base, map);
 
         return alphabet;
     }
@@ -164,8 +193,23 @@ public class XoverGA {
     private Individual crossover(Individual a, Individual b){
         Random random = new Random();
 
+        //System.out.println("Using: " + a.toString());
+        //System.out.println("And :  " + b.toString());
+
+
         HashMap<Character, Character> newAlphabet = new HashMap<>();
 
+        int turningPoint = random.nextInt(26);
+
+        for(int i = 0; i < turningPoint; i++){  // iterate up to turn for A
+            newAlphabet.put(letters[i], a.getAlphabet().get(letters[i]));
+        }
+
+        for(int i = turningPoint; i < 26; i++) {  // iterate after turn for B
+            newAlphabet = tryAdd(newAlphabet, letters[i], b.getAlphabet().get(letters[i]));
+        }
+
+        /*
         // Should make 26 passes, each time trying to fit a pair at random. This means it will collide often and only
         // change about half the values probably
         for (int i=0; i<26; i++){
@@ -197,8 +241,12 @@ public class XoverGA {
             }
         }
 
+         */
+
         Individual child = new Individual(newAlphabet);
 
+        //System.out.println("We get: " + child.toString());
+        //System.out.println();
         return child;
 
 

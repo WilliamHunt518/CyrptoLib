@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6586c353-df3f-420c-9659-ef36ec084beb" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Tools/CTCRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tools/Translator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvoMASSolver/Individual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvoMASSolver/Individual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvoMASSolver/XoverGA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvoMASSolver/XoverGA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solving/MonoAlphabeticSubstitutionSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solving/MonoAlphabeticSubstitutionSolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/CeaserRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/CeaserRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/MASHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/MASHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/VigenereHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/VigenereHelper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +185,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
-  <component name="RunManager" selected="Application.MASHelper">
+  <component name="RunManager" selected="Application.MainTest">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -270,8 +271,8 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <configuration name="CeaserRunner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Tools.CeaserRunner" />
+    <configuration name="CTCRunner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tools.CTCRunner" />
       <module name="CryptoLib" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -320,8 +321,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VigenereHelper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Tools.VigenereHelper" />
+    <configuration name="Translator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tools.Translator" />
       <module name="CryptoLib" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -444,11 +445,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MASHelper" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.VigenereHelper" />
-        <item itemvalue="Application.CeaserRunner" />
         <item itemvalue="Application.MainTest" />
+        <item itemvalue="Application.CTCRunner" />
+        <item itemvalue="Application.Translator" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.MASHelper" />
       </list>
     </recent_temporary>
   </component>
@@ -471,7 +472,12 @@
       <workItem from="1613395975902" duration="4368000" />
       <workItem from="1613486020314" duration="228000" />
       <workItem from="1613658916907" duration="10208000" />
-      <workItem from="1613747001938" duration="4214000" />
+      <workItem from="1613747001938" duration="4495000" />
+      <workItem from="1614003975177" duration="4672000" />
+      <workItem from="1614081353260" duration="4467000" />
+      <workItem from="1614267423505" duration="6644000" />
+      <workItem from="1614520491106" duration="1298000" />
+      <workItem from="1614602170930" duration="8508000" />
     </task>
     <servers />
   </component>
@@ -542,12 +548,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java</url>
-          <line>126</line>
+          <line>158</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java</url>
-          <line>118</line>
+          <line>151</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -561,9 +567,24 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/EvoMASSolver/XoverGA.java</url>
-          <line>199</line>
-          <option name="timeStamp" value="29" />
+          <url>file://$PROJECT_DIR$/src/Tools/Translator.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Tools/Translator.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

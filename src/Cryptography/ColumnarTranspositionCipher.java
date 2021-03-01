@@ -17,27 +17,42 @@ public class ColumnarTranspositionCipher extends Cryptor{
         this.key = key;
     }
 
-    private Integer[] calculateIndexOrders(String key){
-        ArrayList<Integer> orders = new ArrayList<>();
+    public Boolean checkKeyEquivalency(String key){
+        Integer[] argOrder = calculateIndexOrders(key);
+        Integer[] thisOrder = calculateIndexOrders(this.key);
+        return Arrays.equals(argOrder, thisOrder);
 
+    }
+
+    private Integer[] calculateIndexOrders(String key){
         char[] keyAsIntArray = key.toCharArray();
 
-        int[] intArray = IntStream.rangeClosed(64, 133).toArray();
+        int[] intArray = IntStream.rangeClosed(63, 133).toArray();
 
-        for(int charValue : intArray){
+        int counter = 0;
+        Integer[] orders = new Integer[key.length()];
+
+        for(int charValue : intArray){  //go through each char from a onwards
             for(int i = 0; i<key.length(); i++){
-                int keyChar = key.toCharArray()[i];
+                int keyChar = key.toCharArray()[i];  //check this val
+                char dbgChr = (char) keyChar;
+
                 if (charValue == keyChar){
-                    orders.add(i);
-                    //System.out.println("FOUND, cv="+charValue+" ("+(char) charValue+") "+"kc="+keyChar+" ("+(char) keyChar+")");
+
+                    orders[i] = counter;
+                    counter++;
+                    System.out.println("FOUND, cv="+charValue+" ("+(char) charValue+") "+"kc="+keyChar+" ("+(char) keyChar+")");
 
                 }
             }
         }
-        //System.out.println("Orders: ");
-        //System.out.println();
-        //System.out.println(orders);
-        return orders.toArray(new Integer[0]);
+
+
+
+        System.out.println("Orders: ");
+        System.out.println();
+        System.out.println(orders);
+        return orders;
     }
 
     @Override
@@ -101,9 +116,26 @@ public class ColumnarTranspositionCipher extends Cryptor{
         return (char)randomNum;
     }
 
+    public String runFirstLines(String cipherText, int keyLen, int numLines){
+        String letters = "abcdefghijklmnoprstuvwxyz";
+        String key = letters.substring(0, keyLen);
+
+        String tempKey = this.key;
+
+        setup(key);
+        String result = decryptCall(cipherText).substring(0, keyLen*numLines);
+
+
+        this.key = tempKey;
+
+        return result;
+    }
+
     @Override
     protected void decrypt() throws Exception {
-        int groupLen = (int) Math.ceil(getCipherText().length() / key.length());
+        int groupLen = (getCipherText().length() / key.length());  //floor div and add 1 (same as ceil div)
+
+        int a = getCipherText().length();
 
         StringBuilder[] columns = new StringBuilder[key.length()];
         for (int i = 0; i<key.length(); i++){
@@ -116,13 +148,13 @@ public class ColumnarTranspositionCipher extends Cryptor{
 
         for(int groupIndex=0; groupIndex<groupLen ; groupIndex++) {
             for(int sublistIndex : indexOrders) {
-                finalBuilder.append(getCipherText().toCharArray()[groupIndex + (sublistIndex * groupLen)]);
+                try {
+                    finalBuilder.append(getCipherText().toCharArray()[groupIndex + ((sublistIndex) * groupLen)]);
+                } catch (Exception e) {
+                    System.out.println("PASSING");
+                }
             }
         }
-
-
-
-
 
         setPlainText(finalBuilder.toString());
     }

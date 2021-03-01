@@ -38,7 +38,7 @@ public class Individual {
     }
 
     public Individual mutate(){
-        int mutations = 4;
+        int mutations = 3;
         HashMap<Character, Character> newAlphabet = new HashMap<Character, Character>();
         for (Map.Entry<Character, Character> map : alphabet.entrySet()) {
             newAlphabet.put(map.getKey(), map.getValue());
@@ -55,9 +55,14 @@ public class Individual {
 
             //System.out.println("alphabet before: " + newAlphabet.toString());
             char base1 = (char) (r1 + 65);
-            char map1 = alphabet.get(base1);
+            char map1 = newAlphabet.get(base1);
             char base2 = (char) (r2 + 65);
-            char map2 = alphabet.get(base2);
+            char map2 = newAlphabet.get(base2);
+
+            //System.out.println("Before: "+base1+"->"+map1+", : "+base2+"->"+map2);
+            //System.out.println("After : "+base1+"->"+map2+", : "+base2+"->"+map1);
+            //System.out.println("(using r1 = "+r1+" and r2 = "+r2);
+            //System.out.println();
 
             newAlphabet.replace(base1, map2);
             newAlphabet.replace(base2, map1);
@@ -65,7 +70,10 @@ public class Individual {
             //System.out.println("alphabet after:  " + newAlphabet.toString());
             //System.out.println();
         }
-
+        //System.out.println();
+        //System.out.println("Now: "+newAlphabet.toString());
+        //System.out.println();
+        //System.out.println();
         Individual newIndividual = new Individual(newAlphabet);
         return newIndividual;
     }
