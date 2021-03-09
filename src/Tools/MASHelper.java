@@ -22,6 +22,7 @@ public class MASHelper {
         //ASSUME alphabet.put('Z', 'i');  // standalone
 
         alphabet.put('Z', 'a');  // standalone// "_e i"  => "be I", "me I", "we I" => None of these make sense, so Z must be A
+
         alphabet.put('Y', 'b');  // "_e a"  => "be a"
 
         alphabet.put('M', 'n');  // "th__ _eth__ ha_ bee_" => "has been" or "had been" (it's unlikely anything else like "beef")
@@ -62,9 +63,12 @@ public class MASHelper {
         // "wor_ing"
         alphabet.put('S', 'k');
 
-        MASCipher.setParams(alphabet);
 
+        MASCipher.setParams(alphabet);
         System.out.println(MASCipher.decryptCall(cipherText));
+        System.out.println();
+        System.out.println();
+        MASCipher.printAlphabet();
     }
 
     public void runFreqAnalysis(){
@@ -99,7 +103,7 @@ public class MASHelper {
 
         System.out.println("here");
         for(Map.Entry<Character, Integer> mapping : listOfEntries){
-            System.out.println(mapping.getKey() + " ==> " + mapping.getValue());
+            System.out.println(mapping.getKey() + " appears " + mapping.getValue() + " time(s)");
         }
     }
 
@@ -108,6 +112,5 @@ public class MASHelper {
         MASHelper.runFreqAnalysis();
         MASHelper.run();
     }
-
 
 }

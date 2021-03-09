@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6586c353-df3f-420c-9659-ef36ec084beb" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Tools/CTCRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tools/Translator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EvoMASSolver/Individual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvoMASSolver/Individual.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EvoMASSolver/XoverGA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvoMASSolver/XoverGA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cryptography/MonoAlphabeticSubstitutionCipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cryptography/MonoAlphabeticSubstitutionCipher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/CeaserRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/CeaserRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/MASHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/MASHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/Translator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,8 +285,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MASHelper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Tools.MASHelper" />
+    <configuration name="CeaserRunner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tools.CeaserRunner" />
       <module name="CryptoLib" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -299,13 +299,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="EvoMASSolver.Main" />
+    <configuration name="MASHelper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tools.MASHelper" />
       <module name="CryptoLib" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="EvoMASSolver.*" />
+          <option name="PATTERN" value="Tools.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -446,10 +446,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainTest" />
-        <item itemvalue="Application.CTCRunner" />
-        <item itemvalue="Application.Translator" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.MASHelper" />
+        <item itemvalue="Application.Translator" />
+        <item itemvalue="Application.CeaserRunner" />
+        <item itemvalue="Application.CTCRunner" />
       </list>
     </recent_temporary>
   </component>
@@ -477,7 +477,11 @@
       <workItem from="1614081353260" duration="4467000" />
       <workItem from="1614267423505" duration="6644000" />
       <workItem from="1614520491106" duration="1298000" />
-      <workItem from="1614602170930" duration="8508000" />
+      <workItem from="1614602170930" duration="10566000" />
+      <workItem from="1614616444699" duration="56000" />
+      <workItem from="1614696664591" duration="708000" />
+      <workItem from="1615211911903" duration="6908000" />
+      <workItem from="1615293712738" duration="1792000" />
     </task>
     <servers />
   </component>
@@ -547,16 +551,6 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java</url>
-          <line>158</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java</url>
-          <line>151</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Tools/VigenereHelper.java</url>
           <line>271</line>
           <option name="timeStamp" value="12" />
@@ -575,16 +569,6 @@
           <url>file://$PROJECT_DIR$/src/Tools/Translator.java</url>
           <line>20</line>
           <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Cryptography/ColumnarTranspositionCipher.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

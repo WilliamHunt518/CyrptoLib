@@ -21,47 +21,32 @@ public class ColumnarTranspositionCipher extends Cryptor{
         Integer[] argOrder = calculateIndexOrders(key);
         Integer[] thisOrder = calculateIndexOrders(this.key);
         return Arrays.equals(argOrder, thisOrder);
-
     }
 
     private Integer[] calculateIndexOrders(String key){
-        char[] keyAsIntArray = key.toCharArray();
-
         int[] intArray = IntStream.rangeClosed(63, 133).toArray();
-
         int counter = 0;
         Integer[] orders = new Integer[key.length()];
-
         for(int charValue : intArray){  //go through each char from a onwards
             for(int i = 0; i<key.length(); i++){
                 int keyChar = key.toCharArray()[i];  //check this val
-                char dbgChr = (char) keyChar;
-
                 if (charValue == keyChar){
-
                     orders[i] = counter;
                     counter++;
                     System.out.println("FOUND, cv="+charValue+" ("+(char) charValue+") "+"kc="+keyChar+" ("+(char) keyChar+")");
-
                 }
             }
         }
-
-
-
-        System.out.println("Orders: ");
-        System.out.println();
-        System.out.println(orders);
         return orders;
     }
 
     @Override
+    //NOT fully working
     protected void encrypt() throws Exception {
         StringBuilder[] columns = new StringBuilder[key.length()];
         for (int i = 0; i<key.length(); i++){
             columns[i] = new StringBuilder();
         }
-
         ArrayList<Character> chars = new ArrayList<>(
                 getPlainText().chars()
                         .mapToObj(e -> (char) e)
@@ -73,7 +58,6 @@ public class ColumnarTranspositionCipher extends Cryptor{
         int index = 0;
         while (charIt.hasNext()){
             Character thisChar = charIt.next();
-
             String substring = thisChar.toString();
             Pattern re = Pattern.compile("[a-zA-Z]+");
             Matcher m = re.matcher(substring);
@@ -86,28 +70,22 @@ public class ColumnarTranspositionCipher extends Cryptor{
                 }
             }
         }
-
         columns = padColumns(columns);
-
         StringBuilder finalBuilder = new StringBuilder();
         Integer[] indexOrders = calculateIndexOrders(key);
         for(int sublistIndex : indexOrders){
             finalBuilder.append(columns[sublistIndex]);
         }
-
         setCipherText(finalBuilder.toString());
-
     }
 
     private StringBuilder[] padColumns(StringBuilder[] columns) {
         int maxLength = columns[0].length();  //The first column is always the longest (or joint-longest)
-
         for (StringBuilder sb : columns){
             if(sb.length()<maxLength){
                 sb.append(getRandChar());
             }
         }
-
         return columns;
     }
 
@@ -116,16 +94,13 @@ public class ColumnarTranspositionCipher extends Cryptor{
         return (char)randomNum;
     }
 
+    // Unused, generates first N characters for key length = N
     public String runFirstLines(String cipherText, int keyLen, int numLines){
         String letters = "abcdefghijklmnoprstuvwxyz";
         String key = letters.substring(0, keyLen);
-
         String tempKey = this.key;
-
         setup(key);
         String result = decryptCall(cipherText).substring(0, keyLen*numLines);
-
-
         this.key = tempKey;
 
         return result;
@@ -135,13 +110,10 @@ public class ColumnarTranspositionCipher extends Cryptor{
     protected void decrypt() throws Exception {
         int groupLen = (getCipherText().length() / key.length());  //floor div and add 1 (same as ceil div)
 
-        int a = getCipherText().length();
-
         StringBuilder[] columns = new StringBuilder[key.length()];
         for (int i = 0; i<key.length(); i++){
             columns[i] = new StringBuilder();
         }
-
 
         Integer[] indexOrders = calculateIndexOrders(key);
         StringBuilder finalBuilder = new StringBuilder();
@@ -155,8 +127,6 @@ public class ColumnarTranspositionCipher extends Cryptor{
                 }
             }
         }
-
         setPlainText(finalBuilder.toString());
     }
-
 }

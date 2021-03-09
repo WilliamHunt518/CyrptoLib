@@ -11,10 +11,6 @@ public class MonoAlphabeticSubstitutionCipher extends Cryptor{
         setAlphabet(alphabet);
     }
 
-    public void setIndividualParam(char source, char dest){ //source is plain, dest is cipher ( p -> c )
-        alphabet.put(source, dest);
-    }
-
     @Override
     protected void encrypt() throws Exception {
         char[] plainCharArr = getPlainText().toCharArray();
@@ -27,9 +23,7 @@ public class MonoAlphabeticSubstitutionCipher extends Cryptor{
             }
         }
         setCipherText(String.valueOf(cipherCharArr));
-
     }
-
 
     @Override
     protected void decrypt() throws Exception {
@@ -100,5 +94,13 @@ public class MonoAlphabeticSubstitutionCipher extends Cryptor{
         for (Map.Entry<Character, Character> mapping : inputAlphabet.entrySet()){
             alphabet.put(mapping.getKey(), mapping.getValue());
         }
+    }
+
+    public void printAlphabet() {
+        for (Map.Entry<Character, Character> mapping : alphabet.entrySet()){
+            System.out.println(mapping.getKey() + " -> " + mapping.getValue());
+        }
+
+
     }
 }
